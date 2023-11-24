@@ -13,8 +13,10 @@ db = SQLAlchemy(app)
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(200), nullable=False)
+    content = db.Column(db.String(250), nullable=False)
+    reward = db.Column(db.String(250))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    completed = db.Column(db.Boolean, nullable = False)
 
     def __repr__(self):
         return '<Task %r>' % self.id
@@ -55,6 +57,11 @@ def update(id):
 
     if request.method == 'POST':
         task.content = request.form['content']
+        completeness = request.form.get('completed')
+        if completeness == "true":
+            task.complete = "Complete"
+        else:
+            task.complete = "Incomplete"
 
         try:
             db.session.commit()

@@ -19,7 +19,9 @@
         {% for task in tasks %}
             <tr>
                 <td>{{ task.content }}</td>
+                <td>{{ task.reward }}</td>
                 <td>{{ task.date_created.date() }}</td>
+                <td></td>
                 <td>
                     <a href="/delete/{{task.id}}">Delete</a>
                     <br>
