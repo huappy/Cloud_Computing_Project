@@ -13,15 +13,19 @@
     <table>
         <tr>
             <th>Task</th>
+            <th>Reward</th>
             <th>Added</th>
+            <th>Complete</th>
+            
             <th>Actions</th>
         </tr>
         {% for task in tasks %}
             <tr>
                 <td>{{ task.content }}</td>
-                <td>{{ task.reward }}</td>
                 <td>{{ task.date_created.date() }}</td>
-                <td></td>
+                <td>{{ task.reward }}</td>
+                <td>{{ date_to_complete.date() }}</td>
+                <td>{{ task.is_complete }}</td>
                 <td>
                     <a href="/delete/{{task.id}}">Delete</a>
                     <br>
@@ -35,6 +39,8 @@
     <div class="form">
         <form action="/" method="POST">
             <input type="text" name="content" id="content">
+            <input type="text" name="reward" id="reward">
+            <input type="datetime-local" name="complete_by" id = "complete_by">
             <input type="submit" value="Add Task">
         </form>
     </div>
