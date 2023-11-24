@@ -14,8 +14,9 @@ db = SQLAlchemy(app)
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(500), nullable=False)
-    reward = db.Column(db.String(250))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    reward = db.Column(db.String(250))
+    date_to_complete = db.Column(db.DateTime, nullable = False)
     is_complete = db.Column(db.Boolean, nullable = False)
 
     def __repr__(self):
