@@ -10,10 +10,28 @@
 
     <div class="form">
         <form action="/update/{{task.id}}" method="POST">
+
+            <br>
+            <br>
+            <label for "content">Task:    </label>
             <input type="text" name="content" id="content" value="{{task.content}}">
+
+            <br>
+            <br>
+            <label for "reward">Reward:    </label>
             <input type="text" name="reward" id="reward" value="reward">
-            <input type="datetime-local" name="complete_by" id = "complete_by" value="{{task.complete_by}}">
+
+            <br>
+            <br>
+            <label for "complete_by">Plan to complete by:    </label>
+            <input type="date" name="complete_by" id = "complete_by" value="{{task.complete_by}}">
+
+            <br>
+            <br>
+            <label for "is_complete">Completed:    </label>
             <input type="checkbox" name ="is_complete" id="is_complete" value ="true">
+
+            <br>
             <input type="submit" value="Update">
         </form>
     </div>

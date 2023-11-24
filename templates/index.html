@@ -1,22 +1,27 @@
 {% extends 'base.html' %}
-
 {% block head %}
-<title>Task Master</title>
+<title>To-Do</title>
 {% endblock %}
 
 {% block body %}
 <div class="content">
-    <h1 style="text-align: center">Task Master</h1>
+    <h1 style="text-align: center">To-Do</h1>
     {% if tasks|length < 1 %}
     <h4 style="text-align: center">There are no tasks. Create one below!</h4>
     {% else %}
     <table>
+        <thead>
+            <tr>
+                <th colspan="6">My Tasks</th>
+            </tr>
+        </thead>
         <tr>
             <th>Task</th>
+            <th>Date Added</th>
             <th>Reward</th>
-            <th>Added</th>
-            <th>Complete</th>
-            
+            <th>Complete Task By</th>
+            <th>Status</th>
+
             <th>Actions</th>
         </tr>
         {% for task in tasks %}
@@ -24,7 +29,7 @@
                 <td>{{ task.content }}</td>
                 <td>{{ task.date_created.date() }}</td>
                 <td>{{ task.reward }}</td>
-                <td>{{ date_to_complete.date() }}</td>
+                <td>{{ task.date_to_complete.date() }}</td>
                 <td>{{ task.is_complete }}</td>
                 <td>
                     <a href="/delete/{{task.id}}">Delete</a>
@@ -38,9 +43,25 @@
 
     <div class="form">
         <form action="/" method="POST">
+
+            <br>
+            <br>
+            <label for "content">Enter a task: </label><br>
             <input type="text" name="content" id="content">
+
+            <br>
+            <br>
+            <label for "reward">Enter a reward for completing the task: </label><br>
             <input type="text" name="reward" id="reward">
-            <input type="datetime-local" name="complete_by" id = "complete_by">
+
+            <br>
+            <br>
+            <label for "complete_by">Complete task by: </label><br>
+            <input type="date" name="complete_by" id = "complete_by">
+
+            <br>
+            <br>
+            <br>
             <input type="submit" value="Add Task">
         </form>
     </div>

@@ -6,15 +6,21 @@ body, html {
 
 .content {
     margin: 0 auto;
-    width: 400px;
+    width: 1000px;
+}
+
+thead {
+    background-color: #333;
+    color: #fff;
 }
 
 table, td, th {
     border: 1px solid #aaa;
+    padding: 1px
 }
 
 table {
-    border-collapse: collapse;
+    border: 1px double #aaa;
     width: 100%;
 }
 

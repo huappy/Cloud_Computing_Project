@@ -4,10 +4,10 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://{}:{}@{}/{}".format(
-	"huappyDee",
-	"MasterPassword14",
-	"project-database.cciooaq0e4do.us-east-1.rds.amazonaws.com",
-	"project-database",
+    "huappyDee",
+    "MasterPassword14",
+    "project-database.cciooaq0e4do.us-east-1.rds.amazonaws.com",
+    "project-database",
 )
 db = SQLAlchemy(app)
 
@@ -17,7 +17,7 @@ class Todo(db.Model):
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     reward = db.Column(db.String(250))
     date_to_complete = db.Column(db.DateTime, nullable = False)
-    is_complete = db.Column(db.Boolean, nullable = False)
+    is_complete = db.Column(db.String(20))
 
     def __repr__(self):
         return '<Task %r>' % self.id
@@ -27,14 +27,16 @@ class Todo(db.Model):
 def index():
     if request.method == 'POST':
         task_content = request.form['content']
-        new_task = Todo(content=task_content)
+        task_reward = request.form['reward']
+        task_date_to_complete = request.form['complete_by']
+        new_task = Todo(content=task_content, reward = task_reward, date_to_complete= task_date_to_complete, is_complete= 'Incompelte')
 
         try:
             db.session.add(new_task)
             db.session.commit()
             return redirect('/')
         except:
-            return 'There was an issue adding your task'
+            return f'There was an issue adding your task: {new_task}, \n{new_task.content}, \n{new_task.date_created}, \n{new_task.reward}, \n{new_task.date_to_complete}, \n{new_task.is_complete}'
 
     else:
         tasks = Todo.query.order_by(Todo.date_created).all()
@@ -59,6 +61,9 @@ def update(id):
     if request.method == 'POST':
         task.content = request.form['content']
         completeness = request.form.get('is_complete')
+        task.reward = request.form["reward"]
+        task.complete_by = request.form['complete_by']
+
         if completeness == "true":
             task.is_complete = "Complete"
         else:
@@ -76,3 +81,4 @@ def update(id):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
+                                         
