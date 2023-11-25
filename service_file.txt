@@ -1,0 +1,12 @@
+[Unit]
+Description = Gumicorn instance for a To-Do list app
+After= network.target
+
+[Service]
+User = ec2-user
+Group= www-data
+WorkingDirectroy= /home/ec2-user/Cloud_Computing_Project
+ExecStart = /home/ec2-user/Cloud_Computing_Project/venv/bin/gunicorn -b localhost:8000
+Restart= always
+[Install]
+WantedBy=multi-user.target
