@@ -1,5 +1,5 @@
 [Unit]
-Description = Gumicorn instance for a To-Do list app
+Description = Gunicorn instance for a To-Do list app
 After= network.target
 
 [Service]
