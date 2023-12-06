@@ -2,12 +2,12 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-app = Flask(__name__)
+app = Flask(__name__)                   #Config same as in video but with "+pymysql" after the mysql init.
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://{}:{}@{}/{}".format(
-    "huappyDee",
-    "MasterPassword14",
-    "project-database.cciooaq0e4do.us-east-1.rds.amazonaws.com",
-    "project-database",
+    "huappyDee",                                                        #username
+    "MasterPassword14",                                                 #password
+    "project-database.cciooaq0e4do.us-east-1.rds.amazonaws.com",        #RDS Endpoint    
+    "project-database",                                                 #Database name
 )
 db = SQLAlchemy(app)
 
